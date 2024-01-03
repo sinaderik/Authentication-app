@@ -1,7 +1,9 @@
 import React from 'react'
 
 export default function AuthContext() {
-  return (
+    const testAuth='test'
+    console.log(testAuth)
+    return (
     <div>AuthContext</div>
   )
 }
