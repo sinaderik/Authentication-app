@@ -10,7 +10,7 @@ export default function Login() {
     const [loading, setLoading] = useState(false)
     const emailRef = useRef();
     const passwordRef = useRef();
-    const { signup } = useAuth()
+    const { login } = useAuth()
 
     async function handelSubmit(e) {
         e.preventDefault();
@@ -18,10 +18,10 @@ export default function Login() {
         try {
             setError('')
             setLoading(true)
-            await signup(emailRef.current.value, passwordRef.current.value)
+            await login(emailRef.current.value, passwordRef.current.value)
         } catch (error) {
             // console.error('Error during signup:', error);
-            setError(`Failed to create an account! ${error}`);
+            setError(`Failed to sign in ! ${error}`);
         }
         setLoading(false)
     }
