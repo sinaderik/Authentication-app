@@ -5,19 +5,16 @@ import { useAuth } from '../../context/AuthContext';
 import { Link } from 'react-router-dom';
 import "../../components/App.css"
 
-export default function SignUp() {
+export default function Login() {
     const [error, setError] = useState('')
     const [loading, setLoading] = useState(false)
     const emailRef = useRef();
     const passwordRef = useRef();
-    const passwordConfirmRef = useRef();
     const { signup } = useAuth()
 
     async function handelSubmit(e) {
         e.preventDefault();
-        if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-            return setError('Password dont match !')
-        }
+
         try {
             setError('')
             setLoading(true)
@@ -33,7 +30,7 @@ export default function SignUp() {
         <>
             <Card>
                 <Card.Body>
-                    <h2 className='text-center mb-4'>Sign up</h2>
+                    <h2 className='text-center mb-4'>Log in</h2>
                     {error && <Alert variant="danger">{error}</Alert>}
                     <Form onSubmit={handelSubmit}>
                         <Form.Group id="email">
@@ -44,16 +41,13 @@ export default function SignUp() {
                             <Form.Label>Password</Form.Label>
                             <Form.Control type='password' ref={passwordRef} required />
                         </Form.Group>
-                        <Form.Group id="password-confirm">
-                            <Form.Label>Password-Confirmation</Form.Label>
-                            <Form.Control type='password' ref={passwordConfirmRef} required />
-                        </Form.Group>
-                        <Button disabled={loading} className='w-100 mt-4' type='submit'>Sign Up</Button>
+
+                        <Button disabled={loading} className='w-100 mt-4' type='submit'>Log in</Button>
                     </Form>
                 </Card.Body>
             </Card>
             <div className='w-100 text-center mt-2'>
-                Already have an account ?<Link to="/login"> Login</Link> 
+               Need an account ? <Link to="/signup">Sign up</Link> 
             </div>
         </>
     )
