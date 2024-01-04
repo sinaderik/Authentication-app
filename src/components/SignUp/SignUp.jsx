@@ -9,7 +9,7 @@ export default function SignUp() {
     const emailRef = useRef();
     const passwordRef = useRef();
     const passwordConfirmRef = useRef();
-    const { signup, currentUser } = useAuth()
+    const { signup } = useAuth()
 
     async function handelSubmit(e) {
         e.preventDefault();
@@ -21,8 +21,8 @@ export default function SignUp() {
             setLoading(true)
             await signup(emailRef.current.value, passwordRef.current.value)
         } catch (error) {
-            console.error('Error during signup:', error);
-            setError('Failed to create an account!');
+            // console.error('Error during signup:', error);
+            setError(`Failed to create an account! ${error}`);
         }
         setLoading(false)
     }
@@ -32,7 +32,6 @@ export default function SignUp() {
             <Card>
                 <Card.Body>
                     <h2 className='text-center mb-4'>Sign up</h2>
-                    {currentUser && currentUser.email}
                     {error && <Alert variant="danger">{error}</Alert>}
                     <Form onSubmit={handelSubmit}>
                         <Form.Group id="email">
