@@ -2,7 +2,7 @@ import React from 'react'
 import { useRef, useState } from 'react'
 import { Form, Button, Card, Alert } from 'react-bootstrap'
 import { useAuth } from '../../context/AuthContext';
-import { Link } from 'react-router-dom';
+import { Link,useNavigate } from 'react-router-dom';
 import "../../components/App.css"
 
 export default function SignUp() {
@@ -12,6 +12,9 @@ export default function SignUp() {
     const passwordRef = useRef();
     const passwordConfirmRef = useRef();
     const { signup } = useAuth()
+    const navigate=useNavigate();
+
+
 
     async function handelSubmit(e) {
         e.preventDefault();
@@ -22,6 +25,7 @@ export default function SignUp() {
             setError('')
             setLoading(true)
             await signup(emailRef.current.value, passwordRef.current.value)
+            navigate("/")
         } catch (error) {
             // console.error('Error during signup:', error);
             setError(`Failed to create an account! ${error}`);
