@@ -25,7 +25,8 @@ export function AuthProvider({ children }) {
   const value = {
     currentUser,
     signup,
-    login
+    login,
+    logout
   }
 
   function signup(email, password) {
@@ -34,9 +35,13 @@ export function AuthProvider({ children }) {
   }
 
   function login(email, password) {
-    console.log("login")
     const auth = getAuth();
     return signInWithEmailAndPassword(auth, email, password)
+  }
+
+  function logout(){
+    const auth = getAuth();
+    return auth.signOut()
   }
 
   return (
