@@ -5,16 +5,10 @@ import { Link, useNavigate } from 'react-router-dom'
 
 
 export default function Dashboard() {
-  console.log("Dashboard rendered");
   
   const { currentUser, logout } = useAuth()
   const [error, setError] = useState("")
   const navigate = useNavigate();
-
-  useEffect(() => {
-    console.log('test dashboard')
-    console.log("Current User:", currentUser);
-  }, [currentUser]);
 
   async function handleLogOut() {
     setError("");

@@ -5,7 +5,7 @@ import Login from './Login/Login'
 import PrivateRoute from './PrivateRoute/PrivateRoute'
 import { Container } from 'react-bootstrap'
 import { AuthProvider } from '../context/AuthContext'
-import { BrowserRouter as Router, Route, Routes,Outlet } from "react-router-dom"
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom"
 import "../components/App.css"
 
 
