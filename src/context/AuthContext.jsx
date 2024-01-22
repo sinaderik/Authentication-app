@@ -1,6 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { auth } from '../firebase'
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword,sendPasswordResetEmail } from 'firebase/auth';
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  sendPasswordResetEmail,
+  updatePassword as updateFirebasePassword,
+  updateEmail as updateFirebaseEmail,
+  reauthenticateWithCredential,
+  EmailAuthProvider
+} from 'firebase/auth';
 
 const AuthContext = React.createContext();
 
@@ -27,7 +36,9 @@ export function AuthProvider({ children }) {
     signup,
     login,
     logout,
-    resetPassword
+    resetPassword,
+    updateEmail,
+    updatePassword
   }
 
   function signup(email, password) {
@@ -40,15 +51,33 @@ export function AuthProvider({ children }) {
     return signInWithEmailAndPassword(auth, email, password)
   }
 
-  function logout(){
+  function logout() {
     const auth = getAuth();
     return auth.signOut()
   }
 
-  function resetPassword(email){
+  function resetPassword(email) {
     const auth = getAuth();
-    return sendPasswordResetEmail(auth,email)
+    return sendPasswordResetEmail(auth, email)
   }
+
+  async function updatePassword(password) {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    console.log('update password')
+    return updateFirebasePassword(password)
+    // return currentUser.updatePassword(password)
+  }
+
+  async function updateEmail(email) {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    console.log('update email')
+
+    return updateFirebaseEmail(email)
+    // return currentUser.updateEmail(email)
+  }
+
 
   return (
     <div>
